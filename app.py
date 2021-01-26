@@ -1,6 +1,9 @@
 from flask import Flask, request, render_template
+import requests
 
 app = Flask(__name__)
+
+API_BASE = "https://bad-api-assignment.reaktor.com"
 
 @app.route("/", methods = ['GET'])
 def index():
@@ -8,7 +11,12 @@ def index():
 
 @app.route("/gloves", methods = ['GET'])
 def gloves():
-    return "Gloves"
+    r = requests.get(API_BASE + "/v2/products/gloves")
+    if r.status_code == 200:
+        data = r.json()
+        return render_template("gloves.html", items = data)
+
+
 
 @app.route("/facemasks", methods = ['GET'])
 def facemasks():
