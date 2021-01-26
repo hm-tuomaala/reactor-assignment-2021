@@ -3,7 +3,12 @@
 {% block content %}
     <h2 class="overflow-auto pt-3 pb-4"><strong> Gloves </strong></h2>
     {% for item in items %}
-      <p>{{ item['name'] }}</p>
+      <p>
+        {{ item['name'] }}
+      </p>
+      <p id={{ item['id'] }}>
+        <button type="button" onclick="loadXMLDoc(this.parentNode.id)">Get availability</button>
+      </p>
     {% endfor %}
 
 {% endblock %}
