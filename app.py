@@ -1,21 +1,21 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 @app.route("/", methods = ['GET'])
-def root():
-    return "This is the root of the endpoint"
+def index():
+    return render_template("index.html")
 
 @app.route("/gloves", methods = ['GET'])
 def gloves():
     return "Gloves"
 
 @app.route("/facemasks", methods = ['GET'])
-def root():
+def facemasks():
     return "Facemasks"
 
 @app.route("/beanies", methods = ['GET'])
-def root():
+def beanies():
     return "Beanies"
 
 if __name__ == '__main__':
