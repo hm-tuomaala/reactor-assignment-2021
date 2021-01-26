@@ -41,10 +41,10 @@ def gloves():
     return render_template("gloves.html", items = data)
 
 
-@app.route('/background_process_test/<id>')
-def background_process_test(id):
-    # time.sleep(2)
-    print(id)
+@app.route('/background_process_test/<id>/<manufacturer>')
+def background_process_test(id, manufacturer):
+    print(id, manufacturer)
+    
     return id
 
 

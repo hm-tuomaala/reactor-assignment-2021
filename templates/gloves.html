@@ -7,7 +7,7 @@
         {{ item['name'] }}
       </p>
       <p id={{ item['id'] }}>
-        <button type="button" onclick="loadXMLDoc(this.parentNode.id)">Get availability</button>
+        <button type="button" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>
       </p>
     {% endfor %}
 
