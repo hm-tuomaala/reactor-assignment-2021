@@ -44,8 +44,13 @@ def gloves():
 @app.route('/background_process_test/<id>/<manufacturer>')
 def background_process_test(id, manufacturer):
     print(id, manufacturer)
-    
-    return id
+    req = requests.get(API_BASE + "/v2/availability/" + manufacturer)
+    if req.status_code != 200:
+        return "ERROR"
+    for prod in req.json()["response"]:
+        if prod["id"] == id:
+            return ET.fromstring(prod["DATAPAYLOAD"]).find("INSTOCKVALUE").text
+    return "ERROR"
 
 
 @app.route("/facemasks", methods = ['GET'])
