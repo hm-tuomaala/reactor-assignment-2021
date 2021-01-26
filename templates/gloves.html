@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="overflow-auto pt-3 pb-4"><strong> Gloves </strong></h2>
+    {% for item in items %}
+      <p>{{ item['name'] }}</p>
+    {% endfor %}
+
+{% endblock %}
