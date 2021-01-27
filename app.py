@@ -15,36 +15,41 @@ def find_availability(id, man):
             return ET.fromstring(item["DATAPAYLOAD"]).find("INSTOCKVALUE").text
     return "NOT FOUND"
 
+
 @app.route("/", methods = ['GET'])
 def index():
     return render_template("index.html")
+
 
 @app.route("/gloves", methods = ['GET'])
 def gloves():
     r = requests.get(API_BASE + "/v2/products/gloves")
     if r.status_code != 200:
-        return "ERROR -- Try to reload the page"
+        return "ERROR -- Try reloading the page"
     data = r.json()
 
     return render_template("gloves.html", items = data)
+
 
 @app.route("/facemasks", methods = ['GET'])
 def facemasks():
     r = requests.get(API_BASE + "/v2/products/facemasks")
     if r.status_code != 200:
-        return "ERROR -- Try to reload the page"
+        return "ERROR -- Try reloading the page"
     data = r.json()
 
     return render_template("facemasks.html", items = data)
+
 
 @app.route("/beanies", methods = ['GET'])
 def beanies():
     r = requests.get(API_BASE + "/v2/products/beanies")
     if r.status_code != 200:
-        return "ERROR -- Try to reload the page"
+        return "ERROR -- Try reloading the page"
     data = r.json()
 
     return render_template("beanies.html", items = data)
+
 
 @app.route('/background_process/<id>/<manufacturer>', methods = ["GET"])
 def background_process(id, manufacturer):
@@ -60,7 +65,6 @@ def background_process(id, manufacturer):
         return "ERROR"
 
     MANUFACTURER_AVAILABILITY[manufacturer] = req.json()["response"]
-
     return find_availability(id, manufacturer)
 
 
