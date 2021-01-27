@@ -5,6 +5,10 @@
     {% for item in items %}
       <p>
         {{ item['name'] }}
+        <br>
+        {{ item['manufacturer'] }}
+        <br>
+        {{ item['id'] }}
       </p>
       <p id={{ item['id'] }}>
         <button type="button" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>
