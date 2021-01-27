@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <h2 class="overflow-auto pt-3 pb-4"><strong> Gloves </strong></h2>
     {% for item in items %}
-      <p>
-        {{ item['name'] }}
+      <hr/>
+      <p style="margin-bottom: 0;">
+        <b style = "font-size: large;">
+          {{ item['name'] }}
+        </b>
         <br>
-        {{ item['manufacturer'] }}
+          Manufacturer: {{ item['manufacturer'] }}
         <br>
-        {{ item['id'] }}
+          Price: {{ item['price'] }}€
+        <br>
+          Colors:
+        <br>
+                  {% for color in item['color']%}
+                  {{ color }}
+                  {% endfor %}
+        <br>
+          id: {{ item['id'] }}
       </p>
       <p id={{ item['id'] }}>
         <button type="button" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>

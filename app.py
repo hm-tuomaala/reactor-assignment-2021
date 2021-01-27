@@ -22,9 +22,6 @@ def index():
 @app.route("/gloves", methods = ['GET'])
 def gloves():
 
-    makers = set()
-    ret_data = []
-
     r = requests.get(API_BASE + "/v2/products/gloves")
     if r.status_code != 200:
         return "ERROR"
@@ -33,19 +30,16 @@ def gloves():
     return render_template("gloves.html", items = data)
 
 
-@app.route('/background_process_test/<id>/<manufacturer>')
-def background_process_test(id, manufacturer):
-    print(id.upper(), manufacturer)
+@app.route('/background_process/<id>/<manufacturer>', methods = ["GET"])
+def background_process(id, manufacturer):
+    # print(id.upper(), manufacturer)
     id = id.upper()
 
     global MANUFACTURER_AVAILABILITY
     if manufacturer in MANUFACTURER_AVAILABILITY.keys():
-        print("GLOBAL")
         return find_availability(id, manufacturer)
-        print("GLOBAL FAILED")
 
-    print("MAKING REQUEST")
-    req = requests.get(API_BASE + "/v2/availability/" + manufacturer)
+    req = requests.get(API_BASE + "/v2/availability/" + manufacturer) # headers = {'x-force-error-mode':'all'}
 
     if req.status_code != 200 or len(req.json()["response"]) <= 2:
         return "ERROR"
