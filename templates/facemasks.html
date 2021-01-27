@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 class="overflow-auto pt-3 pb-4"><strong> Facemasks </strong></h1>
+    {% for item in items %}
+      <hr/>
+      <p style="margin-bottom: 0;">
+        <b style = "font-size: large;">
+          {{ item['name'] }}
+        </b>
+        <br>
+          Manufacturer: {{ item['manufacturer'] }}
+        <br>
+          Colors: {% for color in item['color']%}
+                    {% if color == 'white' or color == 'yellow'  %}
+                    <span style="background-color:{{ color }};" class="badge badge-light">
+                      {{ color }}
+                    </span>
+                    &nbsp
+                    {% else %}
+                    <span style="background-color:{{ color }};" class="badge badge-secondary">
+                      {{ color }}
+                    </span>
+                    &nbsp
+                    {% endif %}
+                  {% endfor %}
+        <br>
+          Price: {{ item['price'] }}€
+        <br>
+          id: {{ item['id'] }}
+      </p>
+      <p id={{ item['id'] }}>
+        <button type="button" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>
+      </p>
+    {% endfor %}
+
+{% endblock %}
