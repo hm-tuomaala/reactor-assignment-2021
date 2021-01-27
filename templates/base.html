@@ -65,16 +65,18 @@
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText)
-            document.getElementById(parent_id).innerHTML = this.responseText;
 
             if (this.responseText == "INSTOCK"){
-              document.getElementById(parent_id).style.color = "green";
+              document.getElementById(parent_id).className = "badge badge-success";
+              document.getElementById(parent_id).innerHTML = this.responseText;
 
             } else if (this.responseText == "LESSTHAN10") {
-              document.getElementById(parent_id).style.color = "#cccc00";
+              document.getElementById(parent_id).className = "badge badge-warning";
+              document.getElementById(parent_id).innerHTML = this.responseText;
 
             } else if (this.responseText == "OUTOFSTOCK") {
-              document.getElementById(parent_id).style.color = "red";
+              document.getElementById(parent_id).className = "badge badge-danger";
+              document.getElementById(parent_id).innerHTML = this.responseText;
 
             } else {
               // API error occurred
