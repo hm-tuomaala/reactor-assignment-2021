@@ -23,15 +23,31 @@ def index():
 def gloves():
     r = requests.get(API_BASE + "/v2/products/gloves")
     if r.status_code != 200:
-        return "ERROR"
+        return "ERROR -- Try to reload the page"
     data = r.json()
 
     return render_template("gloves.html", items = data)
 
+@app.route("/facemasks", methods = ['GET'])
+def facemasks():
+    r = requests.get(API_BASE + "/v2/products/facemasks")
+    if r.status_code != 200:
+        return "ERROR -- Try to reload the page"
+    data = r.json()
+
+    return render_template("facemasks.html", items = data)
+
+@app.route("/beanies", methods = ['GET'])
+def beanies():
+    r = requests.get(API_BASE + "/v2/products/beanies")
+    if r.status_code != 200:
+        return "ERROR -- Try to reload the page"
+    data = r.json()
+
+    return render_template("beanies.html", items = data)
 
 @app.route('/background_process/<id>/<manufacturer>', methods = ["GET"])
 def background_process(id, manufacturer):
-    # print(id.upper(), manufacturer)
     id = id.upper()
 
     global MANUFACTURER_AVAILABILITY
@@ -47,24 +63,6 @@ def background_process(id, manufacturer):
 
     return find_availability(id, manufacturer)
 
-
-@app.route("/facemasks", methods = ['GET'])
-def facemasks():
-    r = requests.get(API_BASE + "/v2/products/facemasks")
-    if r.status_code != 200:
-        return "ERROR"
-    data = r.json()
-
-    return render_template("facemasks.html", items = data)
-
-@app.route("/beanies", methods = ['GET'])
-def beanies():
-    r = requests.get(API_BASE + "/v2/products/beanies")
-    if r.status_code != 200:
-        return "ERROR"
-    data = r.json()
-
-    return render_template("beanies.html", items = data)
 
 if __name__ == '__main__':
     app.run(debug=True)
