@@ -12,8 +12,6 @@
         <br>
           Manufacturer: {{ item['manufacturer'] }}
         <br>
-          Price: {{ item['price'] }}€
-        <br>
           Colors: {% for color in item['color']%}
                     {% if color == 'white' or color == 'yellow'  %}
                     <span style="background-color:{{ color }};" class="badge badge-light">
@@ -27,6 +25,8 @@
                     &nbsp
                     {% endif %}
                   {% endfor %}
+        <br>
+          Price: {{ item['price'] }}€
         <br>
           id: {{ item['id'] }}
       </p>
