@@ -21,7 +21,6 @@ def index():
 
 @app.route("/gloves", methods = ['GET'])
 def gloves():
-
     r = requests.get(API_BASE + "/v2/products/gloves")
     if r.status_code != 200:
         return "ERROR"
@@ -51,11 +50,21 @@ def background_process(id, manufacturer):
 
 @app.route("/facemasks", methods = ['GET'])
 def facemasks():
-    return "Facemasks"
+    r = requests.get(API_BASE + "/v2/products/facemasks")
+    if r.status_code != 200:
+        return "ERROR"
+    data = r.json()
+
+    return render_template("facemasks.html", items = data)
 
 @app.route("/beanies", methods = ['GET'])
 def beanies():
-    return "Beanies"
+    r = requests.get(API_BASE + "/v2/products/beanies")
+    if r.status_code != 200:
+        return "ERROR"
+    data = r.json()
+
+    return render_template("beanies.html", items = data)
 
 if __name__ == '__main__':
     app.run(debug=True)
