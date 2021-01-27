@@ -4,13 +4,14 @@
 
     <h1 class="overflow-auto pt-3 pb-4"><strong> Facemasks </strong></h1>
     {% for item in items %}
+
       <hr/>
       <p style="margin-bottom: 0;">
         <b style = "font-size: large;">
           {{ item['name'] }}
         </b>
         <br>
-          Manufacturer: {{ item['manufacturer'] }}
+          <span style="font-size: large;"><b>{{ item['manufacturer'] }}</b></span>
         <br>
           Colors: {% for color in item['color']%}
                     {% if color == 'white' or color == 'yellow'  %}
@@ -31,8 +32,9 @@
           id: {{ item['id'] }}
       </p>
       <p id={{ item['id'] }}>
-        <button type="button" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="loadXMLDoc(this.parentNode.id, '{{ item['manufacturer'] }}')">Get availability</button>
       </p>
+
     {% endfor %}
 
 {% endblock %}
